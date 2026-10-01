@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lockstep — is my diversification still working?</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="st-loading">
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-dot" aria-hidden="true"></span>
+    <div><div class="wordmark">LOCKSTEP</div><div class="tagline">Know when your diversification stops working.</div></div>
+  </div>
+  <div class="top-controls">
+    <div class="seg" id="modeSwitch" role="group" aria-label="Data mode">
+      <button type="button" data-mode="replay">Replay</button>
+      <button type="button" data-mode="live">Live</button>
+    </div>
+    <div class="pill" id="connPill"><span class="pill-dot"></span><span id="connText">Connecting…</span></div>
+  </div>
+</header>
+<div class="banner" id="banner" hidden></div>
+<section class="replaybar" id="replayBar" aria-label="Replay controls">
+  <select id="datasetSelect" aria-label="Replay dataset"></select>
+  <button type="button" class="btn primary" id="playBtn">▶ Play</button>
+  <button type="button" class="btn" id="restartBtn">↺ Restart</button>
+  <div class="speeds" id="speedChips" role="group" aria-label="Replay speed"></div>
+  <button type="button" class="btn toggle" id="autopauseBtn" aria-pressed="true" title="Pause the replay at every status change">Pause on alerts</button>
+  <div class="progress"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span id="progressText">—</span></div>
+</section>
+<main class="grid">
+  <section class="panel hero" id="hero" aria-live="polite">
+    <div class="eyebrow">Is my diversification still working?</div>
+    <div class="status-row"><span class="status-word" id="statusWord">—</span><span class="badge-paused" id="pausedBadge" hidden>Paused</span></div>
+    <div class="verdict" id="verdict">Connecting to the Lockstep engine…</div>
+    <p class="explain" id="explanation"></p>
+    <div class="hero-foot">
+      <div class="exposure"><span class="k">Suggested exposure</span><span class="exp-val" id="exposureVal">—</span><span class="k-sub">of normal risk · you decide</span></div>
+      <div class="asof" id="asOf"></div>
+    </div>
+    <div class="warmup" id="warmup" hidden><div class="warmup-track"><div class="warmup-fill" id="warmupFill"></div></div><span id="warmupText"></span></div>
+  </section>
+  <section class="panel bets">
+    <h2>Independent bets</h2>
+    <p class="bets-line"><span id="nAssets">—</span> assets behaving like <b class="bets-num" id="betsVal">—</b> independent bets</p>
+    <div class="bets-dots" id="betsDots" aria-hidden="true"></div>
+    <p class="note">Below 2.0 → WARNING · below 1.7 → CONTAGION</p>
+  </section>
+  <section class="panel heat">
+    <div class="panel-head"><h2>Who moves with whom</h2><span class="note" id="heatAvg"></span></div>
+    <div class="heat-wrap"><canvas id="heatmap" aria-label="Co-movement heatmap"></canvas><div class="tooltip" id="heatTip" hidden></div></div>
+    <div class="legend"><span class="sw" style="background:#1f6f55"></span>move separately<span class="sw" style="background:#c9a227"></span><span class="sw" style="background:#e5483d"></span>move together</div>
+  </section>
+  <section class="panel lead">
+    <h2>Leading the shared move</h2>
+    <ol class="leaders" id="leaderList"></ol>
+    <p class="note">The assets carrying most weight in the basket’s strongest common movement.</p>
+  </section>
+  <section class="panel bask">
+    <h2>Basket condition</h2>
+    <dl class="facts">
+      <div><dt>Basket, last 60 min</dt><dd id="basketRet">—</dd></div>
+      <div><dt>Average correlation</dt><dd id="avgCorr">—</dd></div>
+      <div><dt>Data quality</dt><dd id="dataQuality">—</dd></div>
+    </dl>
+  </section>
+  <section class="panel time">
+    <div class="panel-head"><h2>Timeline</h2><span class="note">independent bets · background = status</span></div>
+    <canvas id="timeline" aria-label="Effective bets timeline"></canvas>
+  </section>
+  <section class="panel log">
+    <div class="panel-head"><h2>Event log</h2><span class="note" id="eventCount"></span></div>
+    <ul class="events" id="eventList"></ul>
+  </section>
+  <section class="panel tech">
+    <details id="techDetails">
+      <summary>Technical details</summary>
+      <div class="tech-grid" id="techGrid"></div>
+      <div class="selfcheck">
+        <button type="button" class="btn" id="selfCheckBtn">Run self-check on saved crashes</button>
+        <div id="selfCheckOut" class="note"></div>
+      </div>
+    </details>
+  </section>
+</main>
+<footer class="foot">Lockstep informs risk awareness. It does not place trades or give investment advice. · Data: Binance public market data.</footer>
+<div class="done-card" id="doneCard" hidden>
+  <div><b>Replay complete.</b> <span class="note">Every frame was computed from real Binance prices by the same engine as live mode.</span></div>
+  <button type="button" class="btn primary" id="doneRestart">↺ Restart</button>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
